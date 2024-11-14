@@ -1,3 +1,4 @@
 import UserRouter from "./UserRouter";
+import VideoRouter from "./VideoRouter";
 
-export { UserRouter }
+export { UserRouter, VideoRouter }

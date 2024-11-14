@@ -11,7 +11,7 @@ const CreateUser = async (c: Context): Promise<SucessResponse> => {
 
     const findtheuser = await db.user.findUnique({
         where: {
-            Email: body.Email
+            email: body.Email
         }
     })
 

@@ -11,4 +11,15 @@ type SucessResponse = {
     data?: any
 }
 
-export { UserTypes, SucessResponse }
+
+type VideoTypes = {
+    userid: string
+    link: string
+}
+
+type VideoEditTypes = {
+    videoid: string,
+    link: string
+}
+
+export { UserTypes, SucessResponse, VideoTypes, VideoEditTypes }
