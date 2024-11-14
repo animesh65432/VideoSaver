@@ -5,11 +5,13 @@ import db from "../db"
 
 const create = async (c: Context): Promise<SucessResponse> => {
     const body = c.body as VideoTypes
+    const user = (c as any).user
+
 
     await db.video.create({
         data: {
             link: body.link,
-            userId: body.userid
+            userId: user.id
         }
     })
 

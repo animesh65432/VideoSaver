@@ -1,7 +1,7 @@
 type UserTypes = {
-    Name: string,
+    Name?: string,
     Email: string,
-    Password: string
+    Password?: string
 }
 
 type SucessResponse = {
@@ -13,7 +13,6 @@ type SucessResponse = {
 
 
 type VideoTypes = {
-    userid: string
     link: string
 }
 
@@ -22,4 +21,9 @@ type VideoEditTypes = {
     link: string
 }
 
-export { UserTypes, SucessResponse, VideoTypes, VideoEditTypes }
+type verifytokenfor = {
+    Email: string,
+    id: string
+}
+
+export { UserTypes, SucessResponse, VideoTypes, VideoEditTypes, verifytokenfor }

@@ -1,20 +1,47 @@
-import { Elysia } from "elysia"
-import { swagger } from '@elysiajs/swagger'
-import Controllers from "../controllers"
-import { Video } from "../Schema"
+import { Elysia } from "elysia";
+import { swagger } from '@elysiajs/swagger';
+import Controllers from "../controllers";
+import { Video } from "../Schema";
+import { authMiddleware } from "../middleware";
+
 const VideoRouter = (app: Elysia) => {
-    app.use(swagger(
+    app.use(swagger({
+        path: "/Video",
+    }));
+
+
+    app.post(
+        "/createvideo",
+        Controllers.VideoController.create,
         {
-            path: "/User"
+            body: Video,
+            beforeHandle: authMiddleware,
         }
-    ))
+    );
 
-    app.post("/createvideo", Controllers.VideoController.create, { body: Video })
-    app.post("/editvideo", Controllers.VideoController.editvideo)
-    app.delete("/deletevideo/:id", Controllers.VideoController.deletevideo)
-    app.get("/getvideo", Controllers.VideoController.get)
+    app.post(
+        "/editvideo",
+        Controllers.VideoController.editvideo,
+        {
+            beforeHandle: authMiddleware,
+        }
+    );
 
+    app.delete(
+        "/deletevideo/:id",
+        Controllers.VideoController.deletevideo,
+        {
+            beforeHandle: authMiddleware,
+        }
+    );
 
-}
+    app.get(
+        "/getvideo",
+        Controllers.VideoController.get,
+        {
+            beforeHandle: authMiddleware,
+        }
+    );
+};
 
-export default VideoRouter
+export default VideoRouter;
