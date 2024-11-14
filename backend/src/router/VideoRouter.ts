@@ -1,7 +1,7 @@
 import { Elysia } from "elysia";
 import { swagger } from '@elysiajs/swagger';
 import Controllers from "../controllers";
-import { Video } from "../Schema";
+import { Video, EditvideoTypes } from "../Schema";
 import { authMiddleware } from "../middleware";
 
 const VideoRouter = (app: Elysia) => {
@@ -17,10 +17,11 @@ const VideoRouter = (app: Elysia) => {
             beforeHandle: authMiddleware,
         }
     );
-    app.post(
+    app.put(
         "/Editvideo",
         Controllers.VideoController.Editvideo,
         {
+            body: EditvideoTypes,
             beforeHandle: authMiddleware,
         }
     );
