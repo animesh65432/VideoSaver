@@ -24,7 +24,6 @@ export const authMiddleware = async (ctx: Context) => {
         }
 
         (ctx as any).user = user as verifytokenfor
-        return ctx
     } else {
         throw new Error("Unauthorized");
     }

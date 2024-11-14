@@ -26,16 +26,16 @@ const create = async (c: Context): Promise<SucessResponse> => {
 
 const get = async ({ params }: { params: { id: string } }): Promise<SucessResponse> => {
 
-    const userid = params.id
+    const userId = params.id
 
-
-    if (!userid) {
+    if (!userId) {
         throw new Error("User id required")
     }
 
     const videos = await db.video.findMany({
         where: {
-            userId: userid
+            userId
+
         }
     })
 
@@ -71,7 +71,7 @@ const deletevideo = async ({ params }: { params: { id: string } }): Promise<Suce
     }
 }
 
-const editvideo = async (c: Context): Promise<SucessResponse> => {
+const Editvideo = async (c: Context): Promise<SucessResponse> => {
     const body = c.body as VideoEditTypes
 
     const videoid = body.videoid
@@ -98,4 +98,4 @@ const editvideo = async (c: Context): Promise<SucessResponse> => {
 }
 
 
-export { create, get, deletevideo, editvideo }
+export { create, get, deletevideo, Editvideo }

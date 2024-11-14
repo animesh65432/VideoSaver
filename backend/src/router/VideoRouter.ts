@@ -9,7 +9,6 @@ const VideoRouter = (app: Elysia) => {
         path: "/Video",
     }));
 
-
     app.post(
         "/createvideo",
         Controllers.VideoController.create,
@@ -18,15 +17,13 @@ const VideoRouter = (app: Elysia) => {
             beforeHandle: authMiddleware,
         }
     );
-
     app.post(
-        "/editvideo",
-        Controllers.VideoController.editvideo,
+        "/Editvideo",
+        Controllers.VideoController.Editvideo,
         {
             beforeHandle: authMiddleware,
         }
     );
-
     app.delete(
         "/deletevideo/:id",
         Controllers.VideoController.deletevideo,
@@ -36,7 +33,7 @@ const VideoRouter = (app: Elysia) => {
     );
 
     app.get(
-        "/getvideo",
+        "/Getvideo/:id",
         Controllers.VideoController.get,
         {
             beforeHandle: authMiddleware,

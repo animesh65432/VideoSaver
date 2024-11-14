@@ -1,8 +1,8 @@
 import { t } from "elysia"
 
-const EditVideoTypes = t.Object({
+const EditvideoTypes = t.Object({
     videoid: t.String(),
     link: t.String()
 })
 
-export default EditVideoTypes
+export default EditvideoTypes

@@ -1,11 +1,11 @@
 import { CreateUser } from "./User"
-import { create, editvideo, deletevideo, get } from "./Video"
+import { create, Editvideo, deletevideo, get } from "./Video"
 
 const Controllers = {
     UserController: {
         CreateUser
     },
-    VideoController: { create, editvideo, deletevideo, get }
+    VideoController: { create, Editvideo, deletevideo, get }
 }
 
 export default Controllers

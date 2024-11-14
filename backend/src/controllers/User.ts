@@ -5,13 +5,13 @@ import db from "../db"
 import jsonwebtoekn from "jsonwebtoken"
 
 
+
 const CreateUser = async (c: Context): Promise<SucessResponse> => {
 
     const body = c.body as UserTypes
-
     const findtheuser = await db.user.findUnique({
         where: {
-            email: body.Email
+            Email: body.Email
         }
     })
 

@@ -1,5 +1,5 @@
 import User from "./User";
 import Video from "./Video";
-import EditVideoTypes from "./EditVidoeTypes";
+import EditvideoTypes from "./EditVidoeTypes";
 
-export { User, Video, EditVideoTypes }
+export { User, Video, EditvideoTypes }
