@@ -6,10 +6,16 @@
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
+    "@elysiajs/swagger": "^1.1.5",
     "@prisma/client": "^5.22.0",
-    "elysia": "latest"
+    "bcryptjs": "^2.4.3",
+    "elysia": "latest",
+    "http-status-codes": "^2.3.0",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.7",
     "bun-types": "latest"
   },
   "module": "src/index.js"
