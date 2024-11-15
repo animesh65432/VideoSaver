@@ -10,7 +10,6 @@ export const DELETE = async (req: NextRequest) => {
 
         await axios.delete(`${process.env.BACKEND_URL}/deletevideo/${video}`)
 
-
         return NextResponse.json({
             message: "deleted the video",
             sucess: true

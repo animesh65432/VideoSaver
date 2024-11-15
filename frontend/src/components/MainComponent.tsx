@@ -1,9 +1,13 @@
 "use client"
 import React from 'react'
+import { Navbar, VideoFrom } from "@/components"
 
 const MainComponent: React.FC = () => {
     return (
-        <div>MainComponent</div>
+        <div>
+            <Navbar />
+            <VideoFrom />
+        </div>
     )
 }
 
