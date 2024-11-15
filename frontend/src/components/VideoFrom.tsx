@@ -13,10 +13,14 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { toast } from 'react-toastify';
-
 import { videoForm } from "../Schema"
+import { useSelector } from "react-redux"
+import { useRouter } from 'next/navigation'
 
 const VideoForm: React.FC = () => {
+    const authtoken = useSelector((state: any) => state.auth.token)
+    const islogin = !!authtoken
+    const router = useRouter()
     const form = useForm<z.infer<typeof videoForm>>({
         resolver: zodResolver(videoForm),
         defaultValues: {
@@ -25,6 +29,9 @@ const VideoForm: React.FC = () => {
     })
 
     const onSubmit = (data: z.infer<typeof videoForm>) => {
+        if (!islogin) {
+            router.push("/login")
+        }
         console.log(data)
         toast.success("Video added successfully")
     }

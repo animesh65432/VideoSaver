@@ -5,7 +5,6 @@ import { Navbar, VideoFrom } from "@/components"
 const MainComponent: React.FC = () => {
     return (
         <div>
-            <Navbar />
             <VideoFrom />
         </div>
     )
