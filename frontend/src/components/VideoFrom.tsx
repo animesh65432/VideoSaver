@@ -16,11 +16,11 @@ import { toast } from 'react-toastify';
 import { videoForm } from "../Schema"
 import { useSelector } from "react-redux"
 import { useRouter } from 'next/navigation'
+import { signIn } from "next-auth/react"
 
 const VideoForm: React.FC = () => {
     const authtoken = useSelector((state: any) => state.auth.token)
     const islogin = !!authtoken
-    const router = useRouter()
     const form = useForm<z.infer<typeof videoForm>>({
         resolver: zodResolver(videoForm),
         defaultValues: {
@@ -30,11 +30,16 @@ const VideoForm: React.FC = () => {
 
     const onSubmit = (data: z.infer<typeof videoForm>) => {
         if (!islogin) {
-            router.push("/login")
+            signIn('google', { callbackUrl: '/' })
         }
         console.log(data)
         toast.success("Video added successfully")
     }
+
+    console.log(process.env.GOOGLE_CLIENT_ID);
+    console.log(process.env.GOOGLE_CLIENT_SECRET);
+    console.log(process.env.NEXTAUTH_SECRET);
+
 
     return (
         <div className="flex justify-center items-center h-screen bg-gray-100">
@@ -49,9 +54,10 @@ const VideoForm: React.FC = () => {
                                     <FormLabel>Video link</FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder="Please put your video link here"
+                                            placeholder="Please put your YouTube video link here"
                                             {...field}
-                                            className="w-full"
+                                            className="w-full text-xl font-semibold"
+
                                         />
                                     </FormControl>
                                     <FormMessage />

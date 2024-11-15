@@ -5,6 +5,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Navbar } from "../components"
 import StateProvider from "./StateProvider";
+import { SessionProvider } from "next-auth/react"
+
 
 
 
@@ -18,14 +20,16 @@ export default function RootLayout({
       <body
 
       >
-        <Navbar />
-        <main>
-          <StateProvider>
-            {children}
-          </StateProvider>
+        <SessionProvider>
+          <Navbar />
+          <main>
+            <StateProvider>
+              {children}
+            </StateProvider>
 
-        </main>
-        <ToastContainer />
+          </main>
+          <ToastContainer />
+        </SessionProvider>
       </body>
     </html>
   );
