@@ -34,7 +34,7 @@ const VideoRouter = (app: Elysia) => {
     );
 
     app.get(
-        "/Getvideo/:id",
+        "/Getvideo",
         Controllers.VideoController.get,
         {
             beforeHandle: authMiddleware,

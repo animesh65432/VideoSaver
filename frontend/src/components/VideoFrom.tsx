@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useEffect } from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -14,13 +15,19 @@ import {
 import { Input } from "@/components/ui/input"
 import { toast } from 'react-toastify';
 import { videoForm } from "../Schema"
-import { useSelector } from "react-redux"
-import { useRouter } from 'next/navigation'
+import { useDispatch, useSelector } from "react-redux"
 import { signIn } from "next-auth/react"
-
+import { useSession } from "next-auth/react"
+import { CreateTheUser, useCreatevideo } from "../hooks"
+import { setthetoken } from "../store/slices/AuthSlices"
+import { fetchVideos } from "../store/slices/VideoSlices"
+import { AppDispatch } from "../store"
 const VideoForm: React.FC = () => {
     const authtoken = useSelector((state: any) => state.auth.token)
+    const dispatch = useDispatch<AppDispatch>()
     const islogin = !!authtoken
+    const { data: userinformation } = useSession()
+    const { loading, createvideo } = useCreatevideo()
     const form = useForm<z.infer<typeof videoForm>>({
         resolver: zodResolver(videoForm),
         defaultValues: {
@@ -28,18 +35,31 @@ const VideoForm: React.FC = () => {
         },
     })
 
-    const onSubmit = (data: z.infer<typeof videoForm>) => {
+    const onSubmit = async (data: z.infer<typeof videoForm>) => {
         if (!islogin) {
             signIn('google', { callbackUrl: '/' })
+
         }
-        console.log(data)
-        toast.success("Video added successfully")
+        else {
+            console.log(data, "DATA FROM VIDEO FORM")
+            let resposne = await createvideo(data)
+            console.log(resposne)
+            toast.success("Video added successfully")
+        }
     }
 
-    console.log(process.env.GOOGLE_CLIENT_ID);
-    console.log(process.env.GOOGLE_CLIENT_SECRET);
-    console.log(process.env.NEXTAUTH_SECRET);
+    const check = async () => {
+        if (userinformation?.user?.email) {
+            const { token } = await CreateTheUser({ Email: userinformation?.user?.email })
+            dispatch(setthetoken(token))
+            dispatch(fetchVideos())
 
+        }
+    }
+
+    useEffect(() => {
+        check()
+    }, [userinformation])
 
     return (
         <div className="flex justify-center items-center h-screen bg-gray-100">
@@ -56,7 +76,7 @@ const VideoForm: React.FC = () => {
                                         <Input
                                             placeholder="Please put your YouTube video link here"
                                             {...field}
-                                            className="w-full text-xl font-semibold"
+                                            className="w-full sm:font-semibold  text-xl"
 
                                         />
                                     </FormControl>
@@ -65,7 +85,7 @@ const VideoForm: React.FC = () => {
                             )}
                         />
                         <Button type="submit" className="w-full">
-                            Add the Video
+                            {loading ? "loading" : "Add Video"}
                         </Button>
                     </form>
                 </Form>

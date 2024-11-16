@@ -1,20 +1,29 @@
 import axios from "axios";
 import { StatusCodes } from "http-status-codes";
-import { NextResponse, NextRequest } from "next/server"
+import { NextRequest, NextResponse, } from "next/server"
 
 
 export const GET = async (req: NextRequest) => {
     try {
+        const token = req.headers.get('authorization');
+        let data = await axios.get(`http://localhost:4000/Getvideo`, {
+            headers: {
+                "authorization": token,
+                "Content-Type": "application/json"
+            }
+        })
 
-        const { searchParams } = req.nextUrl;
-        const video = searchParams.get('videoid');
+        const videos = data?.data?.data
 
-        let data = await axios.get(`${process.env.BACKEND_URL}/Getvideo/${video}`)
+        console.log(videos)
+
 
         return NextResponse.json({
             sucess: true,
             message: "videos sent sucessfully",
-            data
+            data: {
+                videos
+            }
         }, {
             status: StatusCodes.OK
         })

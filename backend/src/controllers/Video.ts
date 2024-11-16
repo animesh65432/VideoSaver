@@ -8,25 +8,32 @@ const create = async (c: Context): Promise<SucessResponse> => {
     const user = (c as any).user
 
 
-    await db.video.create({
+
+    let newvideo = await db.video.create({
         data: {
             link: body.link,
             userId: user.id
         }
     })
 
+    console.log(newvideo)
+
     return {
         status: StatusCodes.ACCEPTED,
         sucess: true,
-        message: "Vide created"
+        message: "Vide created",
+        data: {
+            newvideo
+        }
 
     }
 
 }
 
-const get = async ({ params }: { params: { id: string } }): Promise<SucessResponse> => {
+const get = async (c: Context): Promise<SucessResponse> => {
 
-    const userId = params.id
+    const user = (c as any).user
+    const userId = user.id
 
     if (!userId) {
         throw new Error("User id required")

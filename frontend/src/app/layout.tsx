@@ -3,7 +3,6 @@
 import "./globals.css";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Navbar } from "../components"
 import StateProvider from "./StateProvider";
 import { SessionProvider } from "next-auth/react"
 
@@ -21,7 +20,6 @@ export default function RootLayout({
 
       >
         <SessionProvider>
-          <Navbar />
           <main>
             <StateProvider>
               {children}

@@ -1,9 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit"
 import AuthSlice from "./slices/AuthSlices"
-const stroe = configureStore({
+import VideoSlice from "./slices/VideoSlices"
+const store = configureStore({
     reducer: {
-        auth: AuthSlice
+        auth: AuthSlice,
+        video: VideoSlice
     }
 })
 
-export default stroe
+
+
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+export default store
