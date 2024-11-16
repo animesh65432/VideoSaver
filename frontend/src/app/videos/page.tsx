@@ -1,8 +1,8 @@
 import React from 'react'
-import { Video } from "../../components"
+import { Videos } from "../../components"
 const VideoMainPage: React.FC = () => {
     return <>
-        <Video />
+        <Videos />
     </>
 }
 

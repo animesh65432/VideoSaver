@@ -46,6 +46,7 @@ const get = async (c: Context): Promise<SucessResponse> => {
         }
     })
 
+
     return {
         status: StatusCodes.ACCEPTED,
         sucess: true,

@@ -6,6 +6,15 @@ import { NextRequest, NextResponse, } from "next/server"
 export const GET = async (req: NextRequest) => {
     try {
         const token = req.headers.get('authorization');
+
+        if (!token) {
+            return NextResponse.json({
+                message: "token required",
+                sucess: false
+            }, {
+                status: 400
+            })
+        }
         let data = await axios.get(`http://localhost:4000/Getvideo`, {
             headers: {
                 "authorization": token,
@@ -13,17 +22,15 @@ export const GET = async (req: NextRequest) => {
             }
         })
 
-        const videos = data?.data?.data
+        const videos = data?.data?.data?.videos
 
-        console.log(videos)
+        console.log(videos, "From The Nexjs Backend APi")
 
 
         return NextResponse.json({
             sucess: true,
             message: "videos sent sucessfully",
-            data: {
-                videos
-            }
+            videos
         }, {
             status: StatusCodes.OK
         })

@@ -24,7 +24,8 @@ export const fetchVideos = createAsyncThunk<VideoType[], void, { rejectValue: st
                     "authorization": localStorage.getItem("token") || ""
                 }
             });
-            return response.data?.data || [];
+            console.log(response?.data?.videos, "Get APi")
+            return response?.data?.videos || [];
         } catch (error) {
             return thunkAPI.rejectWithValue("Failed to fetch videos");
         }
